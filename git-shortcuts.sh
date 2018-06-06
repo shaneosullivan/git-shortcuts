@@ -7,12 +7,12 @@ function gs {
   git status
 }
 
-# Git diff the first modified file
+# Git diff the next modified file
 function gd {
   git diff $(get_last)
 }
 
-# 'git add' the first modified file
+# 'git add' the next modified file
 function ga {
   if [ -z "$1" ]
     then
