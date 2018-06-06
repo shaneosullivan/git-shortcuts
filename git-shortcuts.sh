@@ -7,9 +7,14 @@ function gs {
   git status
 }
 
-# Git diff the next modified file
+# Git diff the next modified file, or of a provided path if it exists
 function gd {
-  git diff $(get_last)
+  if [ -z "$1" ]
+    then
+      git diff $(get_last)
+    else
+      git diff "$1"
+  fi
 }
 
 # 'git add' the next modified file
