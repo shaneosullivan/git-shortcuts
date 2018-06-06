@@ -17,7 +17,7 @@ function gd {
   fi
 }
 
-# 'git add' the next modified file
+# 'git add' the next modified file, or add the provided path if it exists
 function ga {
   if [ -z "$1" ]
     then
@@ -30,13 +30,23 @@ function ga {
 
 # Add all modified files with the name provided to the current commit, e.g.
 #   gal Button.js
-# will call 'git add ....../Button.js' for every occurrance
+# will call 'git add ....../Button.js' for every occurrance.
+# Another good use case is to add all image assets to the commit, `gal .png`
 function gal {
   if [ -z "$1" ]
     then
       echo "No file name supplied.  You must provide a file name to be extracted from 'git status' and be passed to 'git add'"
     else
       gs | grep "$1" | sed 's/modified://g' | sed 's/         //g' | xargs -n 1 -P 1 -I {} bash -c 'ga "$@"' _ {}
+  fi
+}
+
+function gca {
+  if [ -z "$1" ]
+    then
+      echo "You must provide a message for `git commit -am`"
+    else
+      git commit -am "$1"
   fi
 }
 
