@@ -37,7 +37,7 @@ function gal {
     then
       echo "No file name supplied.  You must provide a file name to be extracted from 'git status' and be passed to 'git add'"
     else
-      gs | grep "$1" | sed 's/modified://g' | sed 's/         //g' | xargs -n 1 -P 1 -I {} bash -c 'ga "$@"' _ {}
+      gs | grep "$1" | sed 's/modified://g' | sed 's/         //g' | xargs -n 1 -P 1 -I {} bash -c 'git add "$@"' _ {}
   fi
 }
 
