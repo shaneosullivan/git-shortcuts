@@ -25,7 +25,6 @@ function ga {
     else
       git add "$1"
   fi
-
 }
 
 # Add all modified files with the name provided to the current commit, e.g.
@@ -53,4 +52,9 @@ function gca {
 # Open the last modified file with vi for editing
 function vil {
   vi $(get_last)
+}
+
+# Remove all local branches that have been merged remotely
+function gclean {
+  git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
 }
