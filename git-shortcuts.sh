@@ -49,6 +49,17 @@ function gca {
   fi
 }
 
+# Checkout a branch.  Default to checking out the master branch
+function gco {
+  if [ -z "$1" ]
+    then
+      git checkout master
+    else
+      git checkout "$1"
+  fi
+
+}
+
 # Open the last modified file with vi for editing
 function vil {
   vi $(get_last)
