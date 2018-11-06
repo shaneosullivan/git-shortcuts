@@ -57,6 +57,15 @@ function gco {
     else
       git checkout "$1"
   fi
+}
+
+function gdiffb {
+  if [ -z "$1" ]
+    then
+      git diff --name-only master
+    else
+      git diff --name-only "$1"
+  fi
 
 }
 
