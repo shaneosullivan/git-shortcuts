@@ -40,6 +40,7 @@ function gal {
   fi
 }
 
+# Git commit all files
 function gca {
   if [ -z "$1" ]
     then
@@ -58,6 +59,17 @@ function gco {
       git checkout "$1"
   fi
 }
+
+# Checkout a new branch.
+function gcob {
+  if [ -z "$1" ]
+    then
+      echo "You must provide a name for the new branch to be created"
+    else
+      git checkout -b "$1"
+  fi
+}
+
 
 function gdiffb {
   if [ -z "$1" ]
