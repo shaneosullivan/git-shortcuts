@@ -70,7 +70,9 @@ function gcob {
   fi
 }
 
-
+# Show the files that have changed in the current branch. By default
+# compares vs master, pass the name of another branch to compare against
+# that
 function gdiffb {
   if [ -z "$1" ]
     then
