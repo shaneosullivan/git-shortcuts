@@ -60,6 +60,10 @@ function gco {
   fi
 }
 
+function gb {
+  git branch
+}
+
 # Checkout a new branch.
 function gcob {
   if [ -z "$1" ]
