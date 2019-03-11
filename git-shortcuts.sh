@@ -64,6 +64,12 @@ function gb {
   git branch
 }
 
+# Show all branches along with their last modified time
+function gbt {
+  git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) -  (%(color:green)%(committerdate:relative)%(color:reset))'
+}
+
+
 # Checkout a new branch.
 function gcob {
   if [ -z "$1" ]
