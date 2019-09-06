@@ -90,7 +90,12 @@ function gdiffb {
     else
       git diff --name-only "$1"
   fi
+}
 
+# git push the current branch. e.g. if the current
+# branch is called "foo", it will do "git push origin foo"
+function gpb {
+  gb | grep "*" | sed 's/* //g' | xargs git push origin
 }
 
 # Open the last modified file with vi for editing
