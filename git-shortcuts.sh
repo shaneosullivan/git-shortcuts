@@ -92,6 +92,11 @@ function gdiffb {
   fi
 }
 
+# Same as gdiffb, but open the files in VSCode
+function gdiffc {
+  gdiffb | xargs code
+}
+
 # git push the current branch. e.g. if the current
 # branch is called "foo", it will do "git push origin foo"
 function gpb {
