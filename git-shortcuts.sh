@@ -27,6 +27,11 @@ function ga {
   fi
 }
 
+# Open the next modified file in Visual Studio Code
+function gcode {
+  code $(get_last)
+}
+
 # Add all modified files with the name provided to the current commit, e.g.
 #   gal Button.js
 # will call 'git add ....../Button.js' for every occurrance.
