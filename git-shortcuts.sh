@@ -17,6 +17,18 @@ function gd {
   fi
 }
 
+# Git diff the next modified file against remote master. You can also
+# provide a file, e.g gdm ./my-file.txt
+function gdm {
+  git fetch origin master
+  if [ -z "$1" ]
+    then
+      git diff origin/master -- $(get_last)
+    else
+      git diff origin/master -- "$1"
+  fi
+}
+
 # 'git add' the next modified file, or add the provided path if it exists
 function ga {
   if [ -z "$1" ]
