@@ -111,7 +111,12 @@ function gdiffb {
 
 # Same as gdiffb, but open the files in VSCode
 function gdiffc {
-  gdiffb | xargs code
+  if [ -z "$1" ]
+    then
+      gdiffb | xargs code
+    else
+      gdiffb $1 | xargs code
+  fi
 }
 
 # git push the current branch. e.g. if the current
