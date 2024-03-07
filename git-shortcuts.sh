@@ -134,3 +134,8 @@ function vil {
 function gclean {
   git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
 }
+
+# Runs "git checkout --" on all modified files
+function gunstage() {
+  git diff --name-only --diff-filter=M | xargs git restore --
+}
