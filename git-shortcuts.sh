@@ -57,6 +57,18 @@ function gal {
   fi
 }
 
+function get_master_branch_name() {
+    if git show-ref --quiet refs/heads/main; then
+        echo "main"
+    elif git show-ref --quiet refs/heads/master; then
+        echo "master"
+    else
+        echo "Neither 'main' nor 'master' branch exists"
+        return 1
+    fi
+}
+
+
 # Git commit all files
 function gca {
   if [ -z "$1" ]
@@ -69,9 +81,11 @@ function gca {
 
 # Checkout a branch.  Default to checking out the master branch
 function gco {
+  local main_branch=$(get_master_branch_name);
+
   if [ -z "$1" ]
     then
-      git checkout master
+      git checkout $main_branch
     else
       git checkout "$1"
   fi
@@ -132,10 +146,37 @@ function vil {
 
 # Remove all local branches that have been merged remotely
 function gclean {
-  git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
+  local is_main=$(gismain)
+
+  if [ $is_main -eq "0" ]; then
+    echo "Only main or master branch can be cleaned"
+  else
+    git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
+  fi
+
 }
 
 # Runs "git checkout --" on all modified files
 function gunstage() {
   git diff --name-only --diff-filter=M | xargs git restore --
+}
+
+# Get current branch
+function gcurb() {
+  git rev-parse --abbrev-ref HEAD
+}
+
+# If the current branch is main or master, prints "1", otherwise prints "0"
+function gismain() {
+  local main_branch=$(get_master_branch_name);
+  local current_branch=$(gcurb);
+
+  # echo "main_branch = $main_branch"
+  # echo "current_branch = $current_branch"
+
+  if [ "$current_branch" = "main" ] || [ "$current_branch" = "master" ]; then
+      echo "1"
+    else
+      echo "0"
+    fi
 }
